@@ -39,6 +39,11 @@
         }
     }
     document.addEventListener("keydown", function(key){
+
+        if(key.keyCode == 32){
+            alert("space bar was pressed :0")
+        }
+
         if(key.keyCode == 39 || key.keyCode == 68){
             L1_x = (L1_x + 5)
             if(L1_x > 745){
