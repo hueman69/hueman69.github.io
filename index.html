@@ -3,10 +3,12 @@
     <link rel="icon" type="image/x-icon" href="parrot.jpeg">
     <title>Mildly Infuriated Parrots</title>
 </head>
-<body style="overflow: hidden; background-image: url('web-back.jpg');">
+<body style="overflow: hidden;">
 <canvas width="750" height="500" id="myCanvas" style="border-width: 2px; border-color: black; border: solid; border-radius: 25px; margin: auto; display: block;"></canvas>
 <img src="parrot.jpeg" id="parrot" style="visibility: hidden;">
 <img src="background.png" id="background" style="visibility: hidden;">
+<img src="box.png" id="box" style="visibility: hidden;">
+<img src="boom.png" id="boom" style="visibility: hidden;">
 </body>
 </html>
 
@@ -15,6 +17,7 @@
     let ctx = c.getContext("2d");
     let L1_x = 600
     let l1_x_2 = L1_x/2
+    let L1_b = 0
 
     background.addEventListener("load", function(){
             ctx.drawImage(background, 0, 0, 750, 500);
@@ -23,6 +26,11 @@
     parrot.addEventListener("load", function(){
             ctx.drawImage(parrot, 15, 425, 45, 45);
             render(1)
+    })
+
+    box.addEventListener("load", function(){
+        ctx.drawImage(box, 600, 425, 50, 50)
+        render(1)
     })
 
     function render(menu) {
@@ -37,12 +45,19 @@
             ctx.quadraticCurveTo((L1_x/2), (l1_x_2-200), L1_x, 435);
             ctx.stroke();
             ctx.drawImage(parrot, 15, 425, 35, 35);
+            ctx.drawImage(box, 600, 425, 50, 50)
+            if (L1_b == 1){
+                ctx.drawImage(boom, 560, 390, 120, 120)
+            }
         }
     }
     document.addEventListener("keydown", function(key){
 
         if(key.keyCode == 32){
-            alert("space bar was pressed :0")
+            if((L1_x) < 656 && (L1_x) > 599){
+                ctx.drawImage(boom, 560, 390, 120, 120)
+                L1_b = 1
+            }
         }
 
         if(key.keyCode == 39 || key.keyCode == 68){
